@@ -13,6 +13,40 @@ class InputArea extends React.Component {
   }
 }
 
+class TodoArea extends React.Component {
+  render() {
+    return (
+      <div>
+      <ul>
+        {this.state.todos.map((todo, index) => {
+          return (
+            <div>
+              <li key={index} id={index}>
+                {todo}
+              </li>
+              <button
+                onClick={() => {
+                  this.props.todoDone(index);
+                }}
+              >
+                完了
+              </button>
+              <button
+                onClick={() => {
+                  this.props.todoDelete(index);
+                }}
+              >
+                削除
+              </button>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
+    );
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -44,33 +78,10 @@ class App extends React.Component {
     return (
       <div>
         <InputArea onClick={() => this.todoAdd()} />
-        <div className="todoArea">
-          <ul>
-            {this.state.todos.map((todo, index) => {
-              return (
-                <div>
-                  <li key={index} id={index}>
-                    {todo}
-                  </li>
-                  <button
-                    onClick={() => {
-                      this.todoDone(index);
-                    }}
-                  >
-                    完了
-                  </button>
-                  <button
-                    onClick={() => {
-                      this.todoDelete(index);
-                    }}
-                  >
-                    削除
-                  </button>
-                </div>
-              );
-            })}
-          </ul>
-        </div>
+        <TodoArea  
+          todoDone={(index) => this.todoDone(index)}
+          todoDelete={(index) => this.todoDelete(index)}
+        />
       </div>
     );
   }
