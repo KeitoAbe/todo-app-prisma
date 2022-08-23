@@ -2,6 +2,20 @@ import { useState } from 'react'
 import './App.css'
 import React from 'react'
 
+class InputArea  extends React.Component {
+
+  render(){
+
+    return (
+      <div>
+      <input type="text" id="todo"/>
+      <button onClick={() => this.props.onClick()}>登録</button>
+    </div>
+    )
+  }
+
+}
+
 class App extends React.Component {
 
   constructor(props) {
@@ -34,10 +48,9 @@ render(){
  
   return (
     <div>
-      <div className='inputArea'>
-        <input type="text" id="todo"/>
-        <button onClick={() => this.todoAdd()}>登録</button>
-      </div>
+      <InputArea 
+      onClick = {() => this.todoAdd()}
+      />
       <div className='todoArea'>
         <ul>
         {this.state.todos.map((todo,index) => { 
