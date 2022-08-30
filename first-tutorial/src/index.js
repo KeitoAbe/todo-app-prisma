@@ -53,6 +53,7 @@ import './index.css';
         }],
           stepNumber: 0,
           xIsNext: true,
+          isAsc: true,
       };
   }
 
@@ -79,6 +80,12 @@ import './index.css';
       this.setState({
         stepNumber: step,
         xIsNext: (step % 2) === 0,
+      });
+    }
+
+    handleOrder() {
+      this.setState({
+        isAsc: !this.state.isAsc,
       });
     }
 
@@ -116,7 +123,8 @@ import './index.css';
           </div>
           <div className="game-info">
             <div>{status}</div>
-            <ol>{moves}</ol>
+             <div><button onClick={() => this.handleOrder()}>{this.state.isAsc ? `To DES` : `To ASC`}</button></div>
+            <ol>{ this.state.isAsc ? moves : moves.reverse() }</ol>
           </div>
         </div>
       );
