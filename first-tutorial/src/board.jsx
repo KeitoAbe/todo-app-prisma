@@ -6,6 +6,7 @@ export function Board(props) {
       <Square
         value={props.squares[i]}
         onClick={() => props.onClick(i)}
+        isHighlight={props.winLine.includes(i)}
         key={i}
       />
     );
