@@ -55,7 +55,9 @@ export function Game(props) {
   });
   let status;
   let winLine = [];
-  if (winnerInfo) {
+  if (winnerInfo === "draw") {
+    status = `Draw`;
+  } else if (winnerInfo !== "draw" && winnerInfo !== null) {
     status = `Winner: ${winnerInfo.player}`;
     winLine = winnerInfo.line;
   } else {
@@ -100,6 +102,9 @@ function calculateWinner(squares) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return { player: squares[a], line: [a, b, c] };
     }
+  }
+  if (!squares.includes(null)) {
+    return "draw";
   }
   return null;
 }
