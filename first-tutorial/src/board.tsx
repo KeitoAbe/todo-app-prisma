@@ -1,6 +1,12 @@
+import React from "react";
 import { Square } from "./square";
+type Props = {
+  onClick: (index: number) => void;
+  winLine: number[];
+  squares: string[];
+};
 
-export function Board(props) {
+export const Board: React.FC<Props> = (props) => {
   const renderSquare = (i) => {
     return (
       <Square
@@ -29,4 +35,4 @@ export function Board(props) {
         })}
     </div>
   );
-}
+};
