@@ -1,5 +1,6 @@
 import { SetStateAction, useState } from "react";
 import { Board } from "./board";
+import style from "./game.module.css"
 
 type History = {
   squares: (string|null)[];
@@ -71,15 +72,15 @@ export function Game() {
   }
   
   return (
-    <div className="game">
-      <div className="game-board">
+    <div className={style.game}>
+      <div className={style.game_board}>
         <Board
           squares ={current.squares}
           onClick ={(i) => handleClick(i)}
           winLine={winLine}
         />
       </div>
-      <div className="game-info">
+      <div className={style.game_info}>
         <div>{status}</div>
         <div>
           <button onClick={() => handleOrder()}>

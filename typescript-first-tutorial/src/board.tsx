@@ -1,5 +1,7 @@
 import React from "react";
 import { Square } from "./square";
+import style from "./board.module.css";
+
 type Props = {
   onClick: (i: number) => void;
   winLine: number[];
@@ -24,7 +26,7 @@ export function Board(props: Props){
         .fill(0)
         .map((row, i) => {
           return (
-            <div className="board-row" key={i}>
+            <div className={style.board_row} key={i}>
               {Array(3)
                 .fill(0)
                 .map((col, j) => {
