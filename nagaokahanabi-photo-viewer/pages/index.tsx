@@ -13,7 +13,8 @@ export default function Home() {
               <img
                 src={`/original/img-nagaokamatsuri-${i}.jpg`}
                 className={styles.img}
-              ></img>
+                key={i}
+              />
             );
           }
           return <div>{list}</div>;
