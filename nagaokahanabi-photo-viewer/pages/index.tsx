@@ -6,12 +6,18 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-          <img src="/original/img-nagaokamatsuri-1.jpg" className={styles.img}></img>
-          <img src="/original/img-nagaokamatsuri-2.jpg" className={styles.img}></img>
-          <img src="/original/img-nagaokamatsuri-3.jpg" className={styles.img}></img>
-          <img src="/original/img-nagaokamatsuri-4.jpg" className={styles.img}></img>
-          <img src="/original/img-nagaokamatsuri-5.jpg" className={styles.img}></img>
-          <img src="/original/img-nagaokamatsuri-6.jpg" className={styles.img}></img>
+        {(() => {
+          const list = [];
+          for (let i = 1; i < 64; i++) {
+            list.push(
+              <img
+                src={`/original/img-nagaokamatsuri-${i}.jpg`}
+                className={styles.img}
+              ></img>
+            );
+          }
+          return <div>{list}</div>;
+        })()}
       </div>
     </div>
   );
