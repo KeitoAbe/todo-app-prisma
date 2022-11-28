@@ -2,24 +2,37 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 
 export default function Home() {
   const [imgNumber, setImgNumber] = useState(0);
-
   return (
     <div>
-      {imgNumber !== 0 && (
-        <div className={styles.imgScaleContainer}>
+      <CSSTransition
+        classNames="modal"
+        in={imgNumber !== 0}
+        timeout={300}
+        unmountOnExit
+      >
+        <div
+          className={
+            imgNumber
+              ? styles.imgScaleContainer
+              : `${styles.imgScaleContainer} ${styles.fadeOut}`
+          }
+        >
           <div
             className={styles.closeButton}
             onClick={() => setImgNumber(0)}
           ></div>
-          <img
-            className={styles.scaleImg}
-            src={`/original/img-nagaokamatsuri-${imgNumber}.jpg`}
-          />
+          {imgNumber !== 0 && (
+            <img
+              className={styles.scaleImg}
+              src={`/original/img-nagaokamatsuri-${imgNumber}.jpg`}
+            />
+          )}
         </div>
-      )}
+      </CSSTransition>
       <div className={styles.container}>
         <div className={styles.imgContainer}>
           {(() => {
