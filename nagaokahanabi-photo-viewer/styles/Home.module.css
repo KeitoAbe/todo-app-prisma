@@ -15,6 +15,24 @@
   cursor: pointer;
 }
 
+.modalEnter {
+  opacity: 0;
+}
+
+.modalEnterActive {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.modalExit {
+  opacity: 1;
+}
+
+.modalExitActive {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
 .imgScaleContainer {
   display: flex;
   justify-content: center;
@@ -28,15 +46,6 @@
   width: 100%;
   height: 100%;
   z-index: 10;
-  animation-name: fadeInAnime;
-  animation-fill-mode: backwards;
-  animation-duration: 0.3s;
-  animation-timing-function: ease;
-  animation-direction: normal;
-}
-
-.fadeOut {
-  animation-name: fadeOutAnime;
 }
 
 .scaleImg {
@@ -77,26 +86,6 @@
   transform-origin: 100% 50%;
   left: auto;
   right: 15%;
-}
-
-@keyframes fadeInAnime {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOutAnime {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
 }
 
 @media (max-width: 1000px) {

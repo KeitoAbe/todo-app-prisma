@@ -9,18 +9,17 @@ export default function Home() {
   return (
     <div>
       <CSSTransition
-        classNames="modal"
+        classNames={{
+          enter: styles.modalEnter,
+          enterActive: styles.modalEnterActive,
+          exit: styles.modalExit,
+          exitActive: styles.modalExitActive,
+        }}
         in={imgNumber !== 0}
         timeout={300}
         unmountOnExit
       >
-        <div
-          className={
-            imgNumber
-              ? styles.imgScaleContainer
-              : `${styles.imgScaleContainer} ${styles.fadeOut}`
-          }
-        >
+        <div className={`${styles.imgScaleContainer}`}>
           <div
             className={styles.closeButton}
             onClick={() => setImgNumber(0)}
