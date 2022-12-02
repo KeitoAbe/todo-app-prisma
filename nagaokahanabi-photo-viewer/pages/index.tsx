@@ -7,7 +7,13 @@ import { CSSTransition } from "react-transition-group";
 export default function Home() {
   const [imgNumber, setImgNumber] = useState(0);
   return (
-    <div>
+    <div
+      className={
+        imgNumber !== 0
+          ? `${styles.wrapper} ${styles.overflowHidden}`
+          : styles.wrapper
+      }
+    >
       <CSSTransition
         classNames={{
           enter: styles.modalEnter,
@@ -32,13 +38,7 @@ export default function Home() {
           )}
         </div>
       </CSSTransition>
-      <div
-        className={
-          imgNumber !== 0
-            ? `${styles.container} ${styles.overflowHidden}`
-            : styles.container
-        }
-      >
+      <div className={styles.container}>
         <div className={styles.imgContainer}>
           {(() => {
             const list = [];

@@ -1,12 +1,15 @@
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
+.wrapper {
   height: 100vh;
   overflow: auto;
 }
 
 .overflowHidden {
   overflow: hidden;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .imgContainer {
