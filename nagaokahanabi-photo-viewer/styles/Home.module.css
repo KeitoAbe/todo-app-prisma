@@ -19,6 +19,9 @@
   height: 333px;
   object-fit: cover;
   cursor: pointer;
+  background-image: url(../public/logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .modalEnter {
@@ -51,7 +54,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  background-image: url(../public/logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .scaleImg {
