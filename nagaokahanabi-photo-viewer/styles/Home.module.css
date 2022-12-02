@@ -1,6 +1,12 @@
 .container {
   max-width: 1000px;
   margin: 0 auto;
+  height: 100vh;
+  overflow: auto;
+}
+
+.overflowHidden {
+  overflow: hidden;
 }
 
 .imgContainer {

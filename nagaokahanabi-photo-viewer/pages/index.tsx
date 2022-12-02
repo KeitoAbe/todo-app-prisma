@@ -19,7 +19,7 @@ export default function Home() {
         timeout={300}
         unmountOnExit
       >
-        <div className={`${styles.imgScaleContainer}`}>
+        <div className={styles.imgScaleContainer}>
           <div
             className={styles.closeButton}
             onClick={() => setImgNumber(0)}
@@ -32,7 +32,13 @@ export default function Home() {
           )}
         </div>
       </CSSTransition>
-      <div className={styles.container}>
+      <div
+        className={
+          imgNumber !== 0
+            ? `${styles.container} ${styles.overflowHidden}`
+            : styles.container
+        }
+      >
         <div className={styles.imgContainer}>
           {(() => {
             const list = [];
