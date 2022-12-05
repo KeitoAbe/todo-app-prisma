@@ -27,24 +27,6 @@
   background-position: center;
 }
 
-.modalEnter {
-  opacity: 0;
-}
-
-.modalEnterActive {
-  opacity: 1;
-  transition: opacity 300ms;
-}
-
-.modalExit {
-  opacity: 1;
-}
-
-.modalExitActive {
-  opacity: 0;
-  transition: opacity 300ms;
-}
-
 .imgScaleContainer {
   display: flex;
   justify-content: center;

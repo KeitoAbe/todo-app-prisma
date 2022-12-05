@@ -1,61 +1,54 @@
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useState } from "react";
-import { CSSTransition } from "react-transition-group";
-
+import * as Dialog from "@radix-ui/react-dialog";
 export default function Home() {
   const [imgNumber, setImgNumber] = useState(0);
+  const [isScroll, setIsScroll] = useState(true);
   return (
     <div
       className={
-        imgNumber !== 0
-          ? `${styles.wrapper} ${styles.overflowHidden}`
-          : styles.wrapper
+        isScroll ? styles.wrapper : `${styles.wrapper} ${styles.overflowHidden}`
       }
     >
-      <CSSTransition
-        classNames={{
-          enter: styles.modalEnter,
-          enterActive: styles.modalEnterActive,
-          exit: styles.modalExit,
-          exitActive: styles.modalExitActive,
-        }}
-        in={imgNumber !== 0}
-        timeout={300}
-        unmountOnExit
-      >
-        <div className={styles.imgScaleContainer}>
-          <div
-            className={styles.closeButton}
-            onClick={() => setImgNumber(0)}
-          ></div>
-          {imgNumber !== 0 && (
-            <img
-              className={styles.scaleImg}
-              src={`/original/img-nagaokamatsuri-${imgNumber}.jpg`}
-            />
-          )}
-        </div>
-      </CSSTransition>
-      <div className={styles.container}>
-        <div className={styles.imgContainer}>
-          {(() => {
-            const list = [];
-            for (let i = 1; i < 64; i++) {
-              list.push(
+      <Dialog.Root open={isScroll === false}>
+        <Dialog.Portal>
+          <Dialog.Content className="DialogContent">
+            <div className={styles.imgScaleContainer}>
+              <div
+                className={styles.closeButton}
+                onClick={() => setIsScroll(true)}
+              ></div>
+              {imgNumber !== 0 && (
                 <img
-                  src={`/original/img-nagaokamatsuri-${i}.jpg`}
-                  className={styles.img}
-                  key={i}
-                  onClick={() => setImgNumber(i)}
+                  className={styles.scaleImg}
+                  src={`/original/img-nagaokamatsuri-${imgNumber}.jpg`}
                 />
-              );
-            }
-            return <div>{list}</div>;
-          })()}
+              )}
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+        <div className={styles.container}>
+          <div className={styles.imgContainer}>
+            {(() => {
+              const list = [];
+              for (let i = 1; i < 64; i++) {
+                list.push(
+                  <img
+                    src={`/original/img-nagaokamatsuri-${i}.jpg`}
+                    className={styles.img}
+                    key={i}
+                    onClick={() => {
+                      setImgNumber(i);
+                      setIsScroll(false);
+                    }}
+                  />
+                );
+              }
+              return <div>{list}</div>;
+            })()}
+          </div>
         </div>
-      </div>
+      </Dialog.Root>
     </div>
   );
 }
