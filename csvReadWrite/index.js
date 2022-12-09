@@ -10,8 +10,13 @@ if (inputString === undefined) {
 } else {
   const inputData = fs.readFileSync(filePath, { encoding: "utf8" });
   const parsedData = parse(inputData, { columns: false });
-  parsedData.push(inputString.split(','));
-  const outputData = stringify(parsedData, { header: false });
-  fs.writeFileSync(filePath, outputData, { encoding: "utf8" });
-  console.log(outputData);
+  const inputRecordArray = inputString.split(",");
+  if (parsedData[0].length !== inputRecordArray.length){
+    console.log("レコードのカラム数が一致しません");
+    process.exit(1);
+  }
+    parsedData.push(inputRecordArray);
+    const outputData = stringify(parsedData, { header: false });
+    fs.writeFileSync(filePath, outputData, { encoding: "utf8" });
+    console.log(outputData); 
 }
