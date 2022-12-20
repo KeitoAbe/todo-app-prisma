@@ -34,7 +34,7 @@ export default function Home() {
               for (let i = 1; i < 64; i++) {
                 list.push(
                   <img
-                    src={`/original/img-nagaokamatsuri-${i}.jpg`}
+                    src={`/generated/images/thumb/thumb-img-nagaokamatsuri-${i}.jpg`}
                     className={styles.img}
                     key={i}
                     onClick={() => {
