@@ -2,7 +2,10 @@ const fs = require("fs");
 const filePath = process.argv[2];
 
 fs.readFile(filePath, "utf8", (err, data) => {
-  if (err) throw err;
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
   const inputDataArray = data.split("\n");
   const keyArray = inputDataArray[0].split(",");
   const objectArray = [];
