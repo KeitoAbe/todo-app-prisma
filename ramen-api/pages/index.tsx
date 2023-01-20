@@ -2,14 +2,14 @@
 import Head from "next/head";
 import useSWR from "swr";
 
-export default function Home() {
+function useRamen(id: string) {
   const fetcher = (url: string): Promise<any> =>
     fetch(url).then((res) => res.json());
-  const { data, error, isLoading } = useSWR(
-    "https://ramen-api.dev/shops/yoshimuraya",
-    fetcher
-  );
+  return useSWR(`https://ramen-api.dev/shops/${id}`, fetcher);
+}
 
+export default function Home() {
+  const { data, error, isLoading } = useRamen("yoshimuraya");
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
   return (
