@@ -9,7 +9,7 @@ function useRamen() {
   return useSWR(`https://ramen-api.dev/shops/${id.id}`, fetcher);
 }
 
-export default function Ramen() {
+export default function RamenContents() {
   const { data, error, isLoading } = useRamen();
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
