@@ -17,7 +17,6 @@ function App() {
   if (isLoading) return <div>loading...</div>;
   return (
     <div>
-      <h1>ラーメン屋 アプリ</h1>
       <ul>
         {data.shops.map((shop: any) => {
           return (
