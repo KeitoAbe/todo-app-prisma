@@ -1,6 +1,6 @@
 import React from "react";
 import useSWR from "swr";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function GetRamenList() {
   const fetcher = (url: string): Promise<any> =>
@@ -11,17 +11,22 @@ function GetRamenList() {
   );
 }
 
-function RamenList() {
+function SideBar() {
   const { data, error, isLoading } = GetRamenList();
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
   return (
-    <div>
+    <div className="ramenList">
       <ul>
         {data.shops.map((shop: any) => {
           return (
             <li key={shop.id}>
-              <Link to={shop.id}>{shop.name}</Link>
+              <NavLink
+                className={({ isActive }) => (isActive ? "active" : undefined)}
+                to={shop.id}
+              >
+                {shop.name}
+              </NavLink>
             </li>
           );
         })}
@@ -30,4 +35,4 @@ function RamenList() {
   );
 }
 
-export default RamenList;
+export default SideBar;

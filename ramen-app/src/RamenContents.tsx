@@ -14,7 +14,7 @@ export default function RamenContents() {
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
   return (
-    <div>
+    <div className="ramenContents">
       <h1>{data.shop.name}</h1>
       <img src={data.shop.photos[0].url} alt={data.shop.name} width="500px" />
     </div>
