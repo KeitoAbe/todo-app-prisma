@@ -12,37 +12,19 @@ code {
     monospace;
 }
 
-header {
-  border-bottom: 1px solid #eee;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  list-style: none;
-  border: 1px solid #eee;
-  padding: 5px;
-}
-
-li a {
+a {
   text-decoration: none;
+  width: 100%;
 }
 
-.ramenList {
-  border-right: 1px solid #eee;
+.active {
+  background-color: #f0f7ff;
 }
 
 .ramenContainer {
   display: flex;
 }
 
-.ramenContents {
-  padding: 0px 20px;
-}
-
-.active {
-  color: red;
+img {
+  max-width: 100%;
 }

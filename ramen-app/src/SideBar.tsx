@@ -1,6 +1,9 @@
 import React from "react";
 import useSWR from "swr";
 import { NavLink } from "react-router-dom";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
 
 function GetRamenList() {
   const fetcher = (url: string): Promise<any> =>
@@ -17,20 +20,26 @@ function SideBar() {
   if (isLoading) return <div>loading...</div>;
   return (
     <div className="ramenList">
-      <ul>
-        {data.shops.map((shop: any) => {
-          return (
-            <li key={shop.id}>
-              <NavLink
-                className={({ isActive }) => (isActive ? "active" : undefined)}
-                to={shop.id}
-              >
-                {shop.name}
-              </NavLink>
-            </li>
-          );
-        })}
-      </ul>
+      {data.shops.map((shop: any) => {
+        return (
+          <ListItem key={shop.id}>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to={shop.id}
+            >
+              <ListItemButton>
+                <ListItemText
+                  primary={shop.name}
+                  primaryTypographyProps={{
+                    color: "primary",
+                    fontWeight: "medium",
+                  }}
+                />
+              </ListItemButton>
+            </NavLink>
+          </ListItem>
+        );
+      })}
     </div>
   );
 }
