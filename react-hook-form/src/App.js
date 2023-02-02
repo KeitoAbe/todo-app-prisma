@@ -5,17 +5,36 @@ function App() {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isValid, errors },
-  } = useForm();
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "Keito Abe",
+      email: "keito.abe@fuller.co.jp",
+      gender: "male",
+      age: "20",
+    },
+  });
 
   const onSubmit = (data) => console.log(data);
 
   return (
     <div className="App">
-      <h1>ログイン</h1>
+      <h1>ユーザー情報の変更</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="name">名前</label>
+          <input
+            id="name"
+            {...register("name", {
+              required: "入力が必須の項目です。",
+            })}
+          />
+          {errors.name?.message && (
+            <div className="error-message">{errors.name.message}</div>
+          )}
+        </div>
+        <div>
+          <label htmlFor="email">メールアドレス</label>
           <input
             id="email"
             {...register("email", {
@@ -32,28 +51,59 @@ function App() {
           )}
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            {...register("password", {
-              required: {
-                value: true,
-                message: "入力が必須の項目です。",
-              },
-              minLength: {
-                value: 8,
-                message: "8文字以上入力してください。",
-              },
-            })}
-            type="password"
-          />
-          {errors.password?.message && (
-            <div className="error-message">{errors.password.message}</div>
+          <label>性別</label>
+          <label htmlFor="field-male">
+            <input
+              {...register("gender", {
+                required: "入力が必須の項目です。",
+              })}
+              type="radio"
+              value="male"
+              id="field-male"
+            />
+            男性
+          </label>
+          <label htmlFor="field-female">
+            <input
+              {...register("gender")}
+              type="radio"
+              value="female"
+              id="field-female"
+            />
+            女性
+          </label>
+          <label htmlFor="field-other">
+            <input
+              {...register("gender")}
+              type="radio"
+              value="other"
+              id="field-other"
+            />
+            その他
+          </label>
+          {errors.gender?.message && (
+            <div className="error-message">{errors.gender.message}</div>
           )}
         </div>
-        <button type="submit" disabled={!isDirty || !isValid}>
-          ログイン
-        </button>
+        <div>
+          <label htmlFor="age">年齢</label>
+          <select
+            {...register("age", {
+              required: "入力が必須の項目です。",
+            })}
+          >
+            <option value="10">10代</option>
+            <option value="20">20代</option>
+            <option value="30">30代</option>
+            <option value="40">40代</option>
+            <option value="50">50代</option>
+            <option value="60">60代以上</option>
+          </select>
+          {errors.age?.message && (
+            <div className="error-message">{errors.age.message}</div>
+          )}
+        </div>
+        <button type="submit">変更</button>
       </form>
     </div>
   );
