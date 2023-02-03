@@ -24,7 +24,3 @@ a {
 .ramenContainer {
   display: flex;
 }
-
-img {
-  max-width: 100%;
-}
