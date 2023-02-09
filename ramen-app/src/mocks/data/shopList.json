@@ -9,7 +9,7 @@
           "width": 1200,
           "height": 900,
           "authorId": "yusukebe",
-          "url": "https://ramen-api.dev/images/yoshimuraya/yoshimuraya-001.jpg"
+          "url": "https://picsum.photos/1200/900"
         }
       ]
     },
@@ -22,7 +22,7 @@
           "width": 1200,
           "height": 900,
           "authorId": "yusukebe",
-          "url": "https://ramen-api.dev/images/sugitaya/sugitaya-001.jpg"
+          "url": "https://picsum.photos/1200/900"
         }
       ]
     },
@@ -35,12 +35,12 @@
           "width": 1200,
           "height": 900,
           "authorId": "yusukebe",
-          "url": "https://ramen-api.dev/images/takasagoya/takasagoya-001.jpg"
+          "url": "https://picsum.photos/1200/900"
         }
       ]
     }
   ],
-  "totalCount": 34,
+  "totalCount": 3,
   "pageInfo": {
     "nextPage": null,
     "prevPage": null,
