@@ -8,10 +8,7 @@ import ListItem from "@mui/material/ListItem";
 function GetRamenList() {
   const fetcher = (url: string): Promise<any> =>
     fetch(url).then((res) => res.json());
-  return useSWR(
-    `https://ramen-api.dev/shops?pretty&page=1&perPage=100`,
-    fetcher
-  );
+  return useSWR(`https://ramen-api.dev/shops`, fetcher);
 }
 
 function SideBar() {

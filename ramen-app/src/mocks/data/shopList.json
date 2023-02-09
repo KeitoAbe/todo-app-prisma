@@ -1,0 +1,51 @@
+{
+  "shops": [
+    {
+      "id": "yoshimuraya",
+      "name": "吉村家",
+      "photos": [
+        {
+          "name": "yoshimuraya-001.jpg",
+          "width": 1200,
+          "height": 900,
+          "authorId": "yusukebe",
+          "url": "https://picsum.photos/1200/900"
+        }
+      ]
+    },
+    {
+      "id": "sugitaya",
+      "name": "杉田家",
+      "photos": [
+        {
+          "name": "sugitaya-001.jpg",
+          "width": 1200,
+          "height": 900,
+          "authorId": "yusukebe",
+          "url": "https://picsum.photos/1200/900"
+        }
+      ]
+    },
+    {
+      "id": "takasagoya",
+      "name": "たかさご家",
+      "photos": [
+        {
+          "name": "takasagoya-001.jpg",
+          "width": 1200,
+          "height": 900,
+          "authorId": "yusukebe",
+          "url": "https://picsum.photos/1200/900"
+        }
+      ]
+    }
+  ],
+  "totalCount": 3,
+  "pageInfo": {
+    "nextPage": null,
+    "prevPage": null,
+    "lastPage": 1,
+    "perPage": 100,
+    "currentPage": 1
+  }
+}

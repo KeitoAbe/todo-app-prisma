@@ -4,10 +4,10 @@ import useSWR from "swr";
 import RamenContents from "./components/Ramen/RamenContents";
 
 function useRamen() {
-  const id = useParams();
+  const { id } = useParams();
   const fetcher = (url: string): Promise<any> =>
     fetch(url).then((res) => res.json());
-  return useSWR(`https://ramen-api.dev/shops/${id.id}`, fetcher);
+  return useSWR(`https://ramen-api.dev/shops/${id}`, fetcher);
 }
 
 export default function Ramen() {
