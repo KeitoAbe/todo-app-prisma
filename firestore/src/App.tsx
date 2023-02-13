@@ -2,12 +2,15 @@ import "./App.css";
 import { db } from "../firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import useSWR from "swr";
+import { z } from "zod";
+
+const namesSchema = z.array(z.string());
 
 function App() {
   const fetcher = async () => {
     const querySnapshot = await getDocs(collection(db, "users"));
     const nameArray = querySnapshot.docs.map((doc) => doc.data().name);
-    return nameArray;
+    return namesSchema.parse(nameArray);
   };
 
   const { data, error, isLoading } = useSWR("users", fetcher);
@@ -17,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      {data.map((name: string, index: number) => {
+      {data.map((name, index) => {
         return <p key={index}>{name}</p>;
       })}
     </div>
