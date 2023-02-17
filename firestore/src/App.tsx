@@ -1,7 +1,14 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  serverTimestamp,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
-import useSWR from "swr";
 import { z } from "zod";
 import { auth } from "../firebase";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
@@ -23,19 +30,37 @@ function SignInButton() {
 }
 
 function GetName() {
+  const [text, setText] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+  const submit = async () => {
+    await addDoc(collection(db, "keitoAbe"), {
+      name: text,
+      timestamp: serverTimestamp(),
+    });
+    setText("");
+  };
   const db = getFirestore();
   const namesSchema = z.array(z.string());
-  const fetcher = async () => {
-    const querySnapshot = await getDocs(collection(db, "keitoAbe"));
-    const nameArray = querySnapshot.docs.map((doc) => doc.data().name);
-    return namesSchema.parse(nameArray);
-  };
-  const { data, error, isLoading } = useSWR("users", fetcher);
-  if (error) return <div>failed to load</div>;
-  if (isLoading || !data) return <div>loading...</div>;
+  const [users, setUsers] = useState<string[]>([]);
+  useEffect(() => {
+    onSnapshot(
+      query(collection(db, "keitoAbe"), orderBy("timestamp")),
+      (snapshot) => {
+        const nameArray = snapshot.docs.map((doc) => doc.data().name);
+        setUsers(namesSchema.parse(nameArray));
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }, []);
   return (
     <div className="App">
-      {data.map((name, index) => {
+      <input value={text} onChange={handleChange} type="text" />
+      <input type="button" onClick={() => submit()} value="追加" />
+      {users.map((name: string, index: number) => {
         return <p key={index}>{name}</p>;
       })}
     </div>
