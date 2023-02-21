@@ -44,11 +44,24 @@ function GetName() {
   const db = getFirestore();
   const namesSchema = z.array(z.string());
   const [users, setUsers] = useState<string[]>([]);
+  const nameArray: string[] = [];
+
   useEffect(() => {
     onSnapshot(
       query(collection(db, "keitoAbe"), orderBy("timestamp")),
       (snapshot) => {
-        const nameArray = snapshot.docs.map((doc) => doc.data().name);
+        let changes = snapshot.docChanges();
+        for (let change of changes) {
+          if (change.type === "added") {
+            nameArray[change.newIndex] = change.doc.data().name;
+          }
+          if (change.type === "modified") {
+            nameArray[change.oldIndex] = change.doc.data().name;
+          }
+          if (change.type === "removed") {
+            nameArray.splice(change.oldIndex, 1);
+          }
+        }
         setUsers(namesSchema.parse(nameArray));
       },
       (error) => {
