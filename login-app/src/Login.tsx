@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 function Login() {
   const [user, loading, error] = useAuthState(auth);
   const [signInWithGoogle] = useSignInWithGoogle(auth);
-  if (loading && error) {
+  if (loading || error) {
     return <></>;
   }
   if (user) {
