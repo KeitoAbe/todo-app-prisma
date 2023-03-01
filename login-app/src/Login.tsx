@@ -10,13 +10,12 @@ function Login() {
   }
   if (user) {
     return <Navigate to="/" replace={true} />;
-  } else {
-    return (
-      <button onClick={() => signInWithGoogle()}>
-        <p>Googleでサインイン</p>
-      </button>
-    );
   }
+  return (
+    <button onClick={() => signInWithGoogle()}>
+      <p>Googleでサインイン</p>
+    </button>
+  );
 }
 
 export default Login;
