@@ -1,14 +1,18 @@
+import { useState } from "react";
 import "./App.css";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate, Outlet } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Auth() {
-  const [user, loading, error] = useAuthState(auth);
-  if (loading || error) {
+  const [isLogin, setIsLogin] = useState<null | boolean>(null);
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    setIsLogin(!!user);
+  });
+  if (isLogin === null) {
     return <></>;
   }
-  if (!user) {
+  if (!isLogin) {
     return <Navigate to="/login" replace={true} />;
   }
   return <Outlet />;
