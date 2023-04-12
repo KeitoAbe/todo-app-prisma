@@ -2,7 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import styles from "./index.module.css";
 
-function FilterableProductTable() {
+type Props = {
+  products: ProductGroup[];
+};
+
+type ProductGroup = {
+  category: string;
+  items: Product[];
+};
+
+type Product = {
+  price: string;
+  stocked: boolean;
+  name: string;
+};
+
+function FilterableProductTable({ products }: Props) {
   return (
     <div>
       <div>
@@ -19,45 +34,52 @@ function FilterableProductTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th colSpan={2}>Fruits</th>
-          </tr>
-          <tr>
-            <td>Apple</td>
-            <td>$1</td>
-          </tr>
-          <tr>
-            <td>Dragonfruit</td>
-            <td>$1</td>
-          </tr>
-          <tr>
-            <td className={styles.soldOut}>Passionfruit</td>
-            <td>$2</td>
-          </tr>
-
-          <tr>
-            <th colSpan={2}>Vegetables</th>
-          </tr>
-          <tr>
-            <td>Spinach</td>
-            <td>$2</td>
-          </tr>
-          <tr>
-            <td className={styles.soldOut}>Pumpkin</td>
-            <td>$4</td>
-          </tr>
-          <tr>
-            <td>Peas</td>
-            <td>$1</td>
-          </tr>
+          {products.map((productGroup: ProductGroup) => {
+            return (
+              <>
+                <tr>
+                  <th colSpan={2}>{productGroup.category}</th>
+                </tr>
+                {productGroup.items.map((product: Product) => {
+                  return (
+                    <tr>
+                      <td className={product.stocked ? "" : styles.soldOut}>
+                        {product.name}
+                      </td>
+                      <td>{product.price}</td>
+                    </tr>
+                  );
+                })}
+              </>
+            );
+          })}
         </tbody>
       </table>
     </div>
   );
 }
 
+const PRODUCTS = [
+  {
+    category: "Fruites",
+    items: [
+      { price: "$1", stocked: true, name: "Apple" },
+      { price: "$1", stocked: true, name: "Dragonfruit" },
+      { price: "$2", stocked: false, name: "Passionfruit" },
+    ],
+  },
+  {
+    category: "Vegetables",
+    items: [
+      { price: "$2", stocked: true, name: "Spinach" },
+      { price: "$4", stocked: false, name: "Pumpkin" },
+      { price: "$1", stocked: true, name: "Peas" },
+    ],
+  },
+];
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <FilterableProductTable />
+    <FilterableProductTable products={PRODUCTS} />
   </React.StrictMode>
 );
