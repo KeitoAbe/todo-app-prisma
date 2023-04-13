@@ -2,7 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import styles from "./index.module.css";
 
-type Props = {
+type ProductGroupProps = {
+  productGroup: ProductGroup;
+};
+
+type ProductTableProps = {
   products: ProductGroup[];
 };
 
@@ -11,50 +15,79 @@ type ProductGroup = {
   items: Product[];
 };
 
+type ProductRowProps = {
+  product: Product;
+};
+
 type Product = {
   price: string;
   stocked: boolean;
   name: string;
 };
 
-function FilterableProductTable({ products }: Props) {
+function ProductRow({ product }: ProductRowProps) {
   return (
-    <div>
+    <tr>
+      <td className={product.stocked ? "" : styles.soldOut}>{product.name}</td>
+      <td>{product.price}</td>
+    </tr>
+  );
+}
+
+function ProductGroup({ productGroup }: ProductGroupProps) {
+  return (
+    <React.Fragment key={productGroup.category}>
+      <tr>
+        <th colSpan={2}>{productGroup.category}</th>
+      </tr>
+      {productGroup.items.map((product) => {
+        return <ProductRow product={product} key={product.name} />;
+      })}
+    </React.Fragment>
+  );
+}
+
+function ProductTable({ products }: ProductTableProps) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((productGroup) => {
+          return (
+            <ProductGroup
+              productGroup={productGroup}
+              key={productGroup.category}
+            />
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+function SearchBar() {
+  return (
+    <>
       <div>
         <input type="text" placeholder="Search..." />
       </div>
       <label>
         <input type="checkbox" /> Only show products in stock
       </label>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((productGroup: ProductGroup) => {
-            return (
-              <>
-                <tr>
-                  <th colSpan={2}>{productGroup.category}</th>
-                </tr>
-                {productGroup.items.map((product: Product) => {
-                  return (
-                    <tr>
-                      <td className={product.stocked ? "" : styles.soldOut}>
-                        {product.name}
-                      </td>
-                      <td>{product.price}</td>
-                    </tr>
-                  );
-                })}
-              </>
-            );
-          })}
-        </tbody>
-      </table>
+    </>
+  );
+}
+
+function FilterableProductTable({ products }: ProductTableProps) {
+  return (
+    <div>
+      <SearchBar />
+      <ProductTable products={products} />
     </div>
   );
 }
