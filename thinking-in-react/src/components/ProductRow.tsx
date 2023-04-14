@@ -1,11 +1,8 @@
-import styles from "./index.module.css";
+import styles from "../index.module.css";
+import { Product } from "../models/Product";
 
 type Props = {
-  product: {
-    price: string;
-    stocked: boolean;
-    name: string;
-  };
+  product: Product;
 };
 
 function ProductRow({ product }: Props) {

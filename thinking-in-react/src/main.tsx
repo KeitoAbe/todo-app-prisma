@@ -1,15 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import FilterableProductTable from "./FilterableProductTable";
-
-export type ProductGroupType = {
-  category: string;
-  items: {
-    price: string;
-    stocked: boolean;
-    name: string;
-  }[];
-};
+import FilterableProductTable from "./components/FilterableProductTable";
 
 const PRODUCTS = [
   {

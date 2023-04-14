@@ -1,5 +1,5 @@
 import ProductGroup from "./ProductGroup";
-import { ProductGroupType } from "./main";
+import { ProductGroup as ProductGroupType } from "../models/ProductGroup";
 
 type Props = {
   products: ProductGroupType[];

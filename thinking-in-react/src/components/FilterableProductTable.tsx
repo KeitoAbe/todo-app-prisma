@@ -1,17 +1,18 @@
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import ProductTable from "./ProductTable";
-import { ProductGroupType } from "./main";
+import { ProductGroup } from "../models/ProductGroup";
+import { Product } from "../models/Product";
 
 type Props = {
-  products: ProductGroupType[];
+  products: ProductGroup[];
 };
 
 function FilterableProductTable({ products }: Props) {
   const [filterText, setFilterText] = useState("");
   const [isStockOnly, setIsStockOnly] = useState(false);
   const filteredProducts = products.map((productGroup) => {
-    const filtered: ProductGroupType = {
+    const filtered: ProductGroup = {
       category: productGroup.category,
       items: getFilteredItems(productGroup.items, filterText, isStockOnly),
     };
@@ -29,7 +30,7 @@ function FilterableProductTable({ products }: Props) {
 export default FilterableProductTable;
 
 function getFilteredItems(
-  items: { name: string; stocked: boolean; price: string }[],
+  items: Product[],
   queryStr: string,
   isOnlyStocked: boolean
 ) {
