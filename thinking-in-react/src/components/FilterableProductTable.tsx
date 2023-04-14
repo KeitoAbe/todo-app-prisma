@@ -21,7 +21,12 @@ function FilterableProductTable({ products }: Props) {
 
   return (
     <div>
-      <SearchBar filterText={filterText} isStockOnly={isStockOnly} />
+      <SearchBar
+        filterText={filterText}
+        isStockOnly={isStockOnly}
+        onFilterTextChange={setFilterText}
+        onIsStockOnlyChange={setIsStockOnly}
+      />
       <ProductTable products={filteredProducts} />
     </div>
   );
