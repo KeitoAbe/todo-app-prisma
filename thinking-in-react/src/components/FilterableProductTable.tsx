@@ -34,7 +34,7 @@ function FilterableProductTable({ products }: Props) {
 
 export default FilterableProductTable;
 
-function getFilteredItems(
+export function getFilteredItems(
   items: Product[],
   queryStr: string,
   isOnlyStocked: boolean
