@@ -19,24 +19,28 @@ export default function TodoList({
   const [todoList, setTodoList] = useState<
     { id: number; text: string | null }[]
   >([]);
-
   const [text, setText] = useState("");
 
   const handleChange = (e: { target: { value: string } }) => {
-    setText(() => e.target.value);
+    setText(e.target.value);
+  };
+
+  const updateTodoList = async () => {
+    try {
+      const data = await getTodoList();
+      setTodoList(data);
+    } catch (error) {
+      alert("Todoリストの取得に失敗しました");
+    }
   };
 
   const handleClickForRegistrationBtn = async () => {
     if (text === "") return;
+
     try {
       await registrationTodo(text);
       setText("");
-      try {
-        const data = await getTodoList();
-        setTodoList(() => data);
-      } catch (error) {
-        alert("Todoリストの取得に失敗しました");
-      }
+      await updateTodoList();
     } catch (error) {
       alert("Todoの登録に失敗しました");
     }
@@ -45,27 +49,15 @@ export default function TodoList({
   const handleClickForDeleteBtn = async (id: number) => {
     try {
       await deleteTodo(id);
-      try {
-        const data = await getTodoList();
-        setTodoList(() => data);
-      } catch (error) {
-        alert("Todoリストの取得に失敗しました");
-      }
+      await updateTodoList();
     } catch (error) {
       alert("Todoの削除に失敗しました");
     }
   };
 
   useEffect(() => {
-    const fetchTodoList = async () => {
-      try {
-        const data = await getTodoList();
-        setTodoList(() => data);
-      } catch (error) {
-        alert("Todoリストの取得に失敗しました");
-      }
-    };
-    fetchTodoList();
+    updateTodoList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getTodoList, registrationTodo]);
 
   return (
@@ -94,9 +86,7 @@ export default function TodoList({
               variant="outlined"
               className={styles.deleteBtn}
               color="error"
-              onClick={() => {
-                handleClickForDeleteBtn(todo.id);
-              }}
+              onClick={() => handleClickForDeleteBtn(todo.id)}
             >
               削除
             </Button>
