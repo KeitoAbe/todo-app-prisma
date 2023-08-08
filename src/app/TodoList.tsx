@@ -8,9 +8,14 @@ import { useEffect, useState } from "react";
 type Props = {
   getTodoList: () => Promise<{ id: number; text: string | null }[]>;
   registrationTodo: (text: string) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
 };
 
-export default function TodoList({ getTodoList, registrationTodo }: Props) {
+export default function TodoList({
+  getTodoList,
+  registrationTodo,
+  deleteTodo,
+}: Props) {
   const [todoList, setTodoList] = useState<
     { id: number; text: string | null }[]
   >([]);
@@ -21,9 +26,16 @@ export default function TodoList({ getTodoList, registrationTodo }: Props) {
     setText(() => e.target.value);
   };
 
-  const handleClick = async () => {
+  const handleClickForRegistrationBtn = async () => {
+    if (text === "") return;
     await registrationTodo(text);
     setText("");
+    const data = await getTodoList();
+    setTodoList(() => data);
+  };
+
+  const handleClickForDeleteBtn = async (id: number) => {
+    await deleteTodo(id);
     const data = await getTodoList();
     setTodoList(() => data);
   };
@@ -50,7 +62,7 @@ export default function TodoList({ getTodoList, registrationTodo }: Props) {
       <Button
         variant="contained"
         className={styles.registrationBtn}
-        onClick={handleClick}
+        onClick={handleClickForRegistrationBtn}
       >
         登録
       </Button>
@@ -58,6 +70,16 @@ export default function TodoList({ getTodoList, registrationTodo }: Props) {
         {todoList.map((todo) => (
           <li key={todo.id} className={styles.todoItem}>
             {todo.text}
+            <Button
+              variant="outlined"
+              className={styles.deleteBtn}
+              color="error"
+              onClick={() => {
+                handleClickForDeleteBtn(todo.id);
+              }}
+            >
+              削除
+            </Button>
           </li>
         ))}
       </ul>

@@ -1,5 +1,5 @@
 .container {
-  margin: 0 5px;
+  margin: 0 10px;
 }
 
 .heading {
@@ -32,4 +32,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f6f6f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

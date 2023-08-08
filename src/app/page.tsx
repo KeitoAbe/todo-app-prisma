@@ -18,8 +18,21 @@ async function registrationTodo(text: string) {
   });
 }
 
+async function deleteTodo(id: number) {
+  "use server";
+  await prisma.todo.delete({
+    where: {
+      id: id,
+    },
+  });
+}
+
 export default async function Home() {
   return (
-    <TodoList getTodoList={getTodoList} registrationTodo={registrationTodo} />
+    <TodoList
+      getTodoList={getTodoList}
+      registrationTodo={registrationTodo}
+      deleteTodo={deleteTodo}
+    />
   );
 }
