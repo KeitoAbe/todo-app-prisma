@@ -39,7 +39,7 @@ async function deleteTodo(id: number) {
   }
 }
 
-export default async function Home() {
+export default function Home() {
   return (
     <TodoList
       getTodoList={getTodoList}
