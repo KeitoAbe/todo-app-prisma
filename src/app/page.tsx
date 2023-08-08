@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function getTodoList() {
+async function getTodoList() {
   "use server";
   const todoList = await prisma.todo.findMany();
   return todoList;
