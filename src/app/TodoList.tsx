@@ -31,7 +31,6 @@ export default function TodoList({
     try {
       await registrationTodo(text);
       setText("");
-      fetchTodoList();
     } catch (error) {
       alert("Todoの登録に失敗しました");
     }
@@ -40,7 +39,6 @@ export default function TodoList({
   const handleClickForDeleteBtn = async (id: number) => {
     try {
       await deleteTodo(id);
-      fetchTodoList();
     } catch (error) {
       alert("Todoの削除に失敗しました");
     }
@@ -57,7 +55,8 @@ export default function TodoList({
 
   useEffect(() => {
     fetchTodoList();
-  });
+  }),
+    [handleClickForDeleteBtn, handleClickForRegistrationBtn];
 
   return (
     <div className={styles.container}>
