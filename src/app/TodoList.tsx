@@ -28,22 +28,42 @@ export default function TodoList({
 
   const handleClickForRegistrationBtn = async () => {
     if (text === "") return;
-    await registrationTodo(text);
-    setText("");
-    const data = await getTodoList();
-    setTodoList(() => data);
+    try {
+      await registrationTodo(text);
+      setText("");
+      try {
+        const data = await getTodoList();
+        setTodoList(() => data);
+      } catch (error) {
+        alert("Todoリストの取得に失敗しました");
+      }
+    } catch (error) {
+      alert("Todoの登録に失敗しました");
+    }
   };
 
   const handleClickForDeleteBtn = async (id: number) => {
-    await deleteTodo(id);
-    const data = await getTodoList();
-    setTodoList(() => data);
+    try {
+      await deleteTodo(id);
+      try {
+        const data = await getTodoList();
+        setTodoList(() => data);
+      } catch (error) {
+        alert("Todoリストの取得に失敗しました");
+      }
+    } catch (error) {
+      alert("Todoの削除に失敗しました");
+    }
   };
 
   useEffect(() => {
     const fetchTodoList = async () => {
-      const data = await getTodoList();
-      setTodoList(() => data);
+      try {
+        const data = await getTodoList();
+        setTodoList(() => data);
+      } catch (error) {
+        alert("Todoリストの取得に失敗しました");
+      }
     };
     fetchTodoList();
   }, [getTodoList, registrationTodo]);
