@@ -5,26 +5,38 @@ const prisma = new PrismaClient();
 
 async function getTodoList() {
   "use server";
-  const todoList = await prisma.todo.findMany();
-  return todoList;
+  try {
+    const todoList = await prisma.todo.findMany();
+    return todoList;
+  } catch (error) {
+    throw new Error("Failed to get todo list");
+  }
 }
 
 async function registrationTodo(text: string) {
   "use server";
-  await prisma.todo.create({
-    data: {
-      text: text,
-    },
-  });
+  try {
+    await prisma.todo.create({
+      data: {
+        text: text,
+      },
+    });
+  } catch (error) {
+    throw new Error("Failed to registration todo");
+  }
 }
 
 async function deleteTodo(id: number) {
   "use server";
-  await prisma.todo.delete({
-    where: {
-      id: id,
-    },
-  });
+  try {
+    await prisma.todo.delete({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    throw new Error("Failed to delete todo");
+  }
 }
 
 export default async function Home() {
