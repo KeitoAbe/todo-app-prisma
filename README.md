@@ -1,2 +1,2 @@
 # todo-app-prisma
-Prismaを使ったtodoアプリ
+Prismaを使ったTODOアプリです
