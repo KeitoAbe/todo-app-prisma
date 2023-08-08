@@ -31,12 +31,7 @@ export default function TodoList({
     try {
       await registrationTodo(text);
       setText("");
-      try {
-        const data = await getTodoList();
-        setTodoList(() => data);
-      } catch (error) {
-        alert("Todoリストの取得に失敗しました");
-      }
+      fetchTodoList();
     } catch (error) {
       alert("Todoの登録に失敗しました");
     }
@@ -45,28 +40,24 @@ export default function TodoList({
   const handleClickForDeleteBtn = async (id: number) => {
     try {
       await deleteTodo(id);
-      try {
-        const data = await getTodoList();
-        setTodoList(() => data);
-      } catch (error) {
-        alert("Todoリストの取得に失敗しました");
-      }
+      fetchTodoList();
     } catch (error) {
       alert("Todoの削除に失敗しました");
     }
   };
 
+  const fetchTodoList = async () => {
+    try {
+      const data = await getTodoList();
+      setTodoList(() => data);
+    } catch (error) {
+      alert("Todoリストの取得に失敗しました");
+    }
+  };
+
   useEffect(() => {
-    const fetchTodoList = async () => {
-      try {
-        const data = await getTodoList();
-        setTodoList(() => data);
-      } catch (error) {
-        alert("Todoリストの取得に失敗しました");
-      }
-    };
     fetchTodoList();
-  }, [getTodoList, registrationTodo]);
+  });
 
   return (
     <div className={styles.container}>
