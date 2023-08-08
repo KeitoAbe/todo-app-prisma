@@ -58,7 +58,7 @@ export default function TodoList({
   useEffect(() => {
     updateTodoList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getTodoList, registrationTodo]);
+  }, [getTodoList, registrationTodo, deleteTodo]);
 
   return (
     <div className={styles.container}>
