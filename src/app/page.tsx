@@ -46,7 +46,7 @@ async function updateTodoDone(todoId: number, done: boolean) {
   try {
     await prisma.todo.update({
       where: { id: todoId },
-      data: { done: !done },
+      data: { done: done },
     });
   } catch (error) {
     throw new Error("Failed to update todo");
