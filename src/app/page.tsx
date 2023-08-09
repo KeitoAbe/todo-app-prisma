@@ -41,11 +41,11 @@ async function deleteTodo(id: number) {
   }
 }
 
-async function updateTodoDone(todoId: number, done: boolean) {
+async function updateTodoDone(id: number, done: boolean) {
   "use server";
   try {
     await prisma.todo.update({
-      where: { id: todoId },
+      where: { id: id },
       data: { done: done },
     });
   } catch (error) {

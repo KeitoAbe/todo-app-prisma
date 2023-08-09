@@ -37,9 +37,9 @@ export default function TodoList({
     }
   };
 
-  const handleClickForCheckbox = async (todoId: number, done: boolean) => {
+  const handleClickForCheckbox = async (id: number, done: boolean) => {
     try {
-      await updateTodoDone(todoId, !done);
+      await updateTodoDone(id, !done);
     } catch (error) {
       alert("Todoの更新に失敗しました");
     }
