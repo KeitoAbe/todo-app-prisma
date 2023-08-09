@@ -1,3 +1,5 @@
+import styles from "./page.module.css";
+import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { PrismaClient } from "@prisma/client";
 
@@ -41,10 +43,9 @@ async function deleteTodo(id: number) {
 
 export default function Home() {
   return (
-    <TodoList
-      getTodoList={getTodoList}
-      registrationTodo={registrationTodo}
-      deleteTodo={deleteTodo}
-    />
+    <div className={styles.container}>
+      <TodoForm registrationTodo={registrationTodo} />
+      <TodoList getTodoList={getTodoList} deleteTodo={deleteTodo} />
+    </div>
   );
 }
