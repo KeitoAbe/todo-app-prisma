@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 
 type Props = {
-  getTodoList: () => Promise<
-    { id: number; text: string | null; done: boolean }[]
-  >;
+  getTodoList: () => Promise<{ id: number; text: string; done: boolean }[]>;
   deleteTodo: (id: number) => Promise<void>;
   updateTodoDone: (todoId: number, done: boolean) => Promise<void>;
 };
@@ -19,7 +17,7 @@ export default function TodoList({
   updateTodoDone,
 }: Props) {
   const [todoList, setTodoList] = useState<
-    { id: number; text: string | null; done: boolean }[]
+    { id: number; text: string; done: boolean }[]
   >([]);
 
   const updateTodoList = async () => {
