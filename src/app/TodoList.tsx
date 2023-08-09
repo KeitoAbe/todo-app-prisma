@@ -3,15 +3,23 @@
 import styles from "./TodoList.module.css";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import Checkbox from "@mui/material/Checkbox";
 
 type Props = {
-  getTodoList: () => Promise<{ id: number; text: string | null }[]>;
+  getTodoList: () => Promise<
+    { id: number; text: string | null; done: boolean }[]
+  >;
   deleteTodo: (id: number) => Promise<void>;
+  updateTodoDone: (todoId: number, done: boolean) => Promise<void>;
 };
 
-export default function TodoList({ getTodoList, deleteTodo }: Props) {
+export default function TodoList({
+  getTodoList,
+  deleteTodo,
+  updateTodoDone,
+}: Props) {
   const [todoList, setTodoList] = useState<
-    { id: number; text: string | null }[]
+    { id: number; text: string | null; done: boolean }[]
   >([]);
 
   const updateTodoList = async () => {
@@ -31,6 +39,14 @@ export default function TodoList({ getTodoList, deleteTodo }: Props) {
     }
   };
 
+  const handleClickForCheckbox = async (todoId: number, done: boolean) => {
+    try {
+      await updateTodoDone(todoId, done);
+    } catch (error) {
+      alert("Todoの更新に失敗しました");
+    }
+  };
+
   useEffect(() => {
     updateTodoList();
   });
@@ -40,7 +56,15 @@ export default function TodoList({ getTodoList, deleteTodo }: Props) {
       <ul className={styles.todoList}>
         {todoList.map((todo) => (
           <li key={todo.id} className={styles.todoItem}>
-            {todo.text}
+            <div>
+              <Checkbox
+                {...(todo.done && { checked: true })}
+                onClick={() => {
+                  handleClickForCheckbox(todo.id, todo.done);
+                }}
+              />
+              {todo.text}
+            </div>
             <Button
               variant="outlined"
               className={styles.deleteBtn}
