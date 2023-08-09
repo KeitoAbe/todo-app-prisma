@@ -16,7 +16,7 @@ export default function TodoList({ registrationTodo }: Props) {
     setText(e.target.value);
   };
 
-  const handleClickForRegistrationBtn = async () => {
+  const handleClick = async () => {
     if (text === "") return;
 
     try {
@@ -41,7 +41,7 @@ export default function TodoList({ registrationTodo }: Props) {
       <Button
         variant="contained"
         className={styles.registrationBtn}
-        onClick={handleClickForRegistrationBtn}
+        onClick={handleClick}
       >
         登録
       </Button>
