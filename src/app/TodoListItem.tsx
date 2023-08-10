@@ -72,6 +72,7 @@ export default function TodoList({
                   type="text"
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
+                  autoFocus
                 />
               ) : (
                 todo.text
