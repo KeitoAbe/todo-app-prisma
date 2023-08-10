@@ -33,6 +33,7 @@ export default function TodoList({
   const handleClickForEditDoneBtn = async () => {
     setIsEdit(false);
     setEditText("");
+    if (editText === "") return;
     try {
       await updateTodoText(todo.id, editText);
     } catch (error) {
