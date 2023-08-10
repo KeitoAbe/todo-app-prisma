@@ -5,6 +5,7 @@ import styles from "./TodoListItem.module.css";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   todo: {
@@ -23,6 +24,7 @@ export default function TodoList({
   updateTodoDone,
   deleteTodo,
 }: Props) {
+  const router = useRouter();
   const [isedit, setIsEdit] = useState(false);
   const [editText, setEditText] = useState("");
 
@@ -32,11 +34,12 @@ export default function TodoList({
   };
 
   const handleClickForEditDoneBtn = async () => {
-    setIsEdit(false);
-    setEditText("");
     if (editText === "") return;
     try {
       await updateTodoText(todo.id, editText);
+      setIsEdit(false);
+      setEditText("");
+      router.refresh();
     } catch (error) {
       alert("Todoの更新に失敗しました");
     }
@@ -45,6 +48,7 @@ export default function TodoList({
   const handleClickForDeleteBtn = async () => {
     try {
       await deleteTodo(todo.id);
+      router.refresh();
     } catch (error) {
       alert("Todoの削除に失敗しました");
     }
@@ -53,6 +57,7 @@ export default function TodoList({
   const handleClickForCheckbox = async () => {
     try {
       await updateTodoDone(todo.id, !todo.done);
+      router.refresh();
     } catch (error) {
       alert("Todoの更新に失敗しました");
     }

@@ -4,12 +4,14 @@ import styles from "./TodoForm.module.css";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   registerTodo: (text: string) => Promise<void>;
 };
 
 export default function TodoList({ registerTodo }: Props) {
+  const router = useRouter();
   const [text, setText] = useState("");
 
   const handleChange = (e: { target: { value: string } }) => {
@@ -22,6 +24,7 @@ export default function TodoList({ registerTodo }: Props) {
     try {
       await registerTodo(text);
       setText("");
+      router.refresh();
     } catch (error) {
       alert("Todoの登録に失敗しました");
     }
