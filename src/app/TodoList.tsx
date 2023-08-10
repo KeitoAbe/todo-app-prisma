@@ -6,8 +6,8 @@ import TodoListItem from "./TodoListItem";
 type Props = {
   getTodoList: () => Promise<{ id: number; text: string; done: boolean }[]>;
   deleteTodo: (id: number) => Promise<void>;
-  updateTodoDone: (todoId: number, done: boolean) => Promise<void>;
-  updateTodoText: (todoId: number, text: string) => Promise<void>;
+  updateTodoDone: (id: number, done: boolean) => Promise<void>;
+  updateTodoText: (id: number, text: string) => Promise<void>;
 };
 
 export default function TodoList({

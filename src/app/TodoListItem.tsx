@@ -11,9 +11,9 @@ type Props = {
     text: string;
     done: boolean;
   };
-  updateTodoText: (todoId: number, text: string) => Promise<void>;
-  updateTodoDone: (todoId: number, done: boolean) => Promise<void>;
-  deleteTodo: (todoId: number) => Promise<void>;
+  updateTodoText: (id: number, text: string) => Promise<void>;
+  updateTodoDone: (id: number, done: boolean) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
 };
 
 export default function TodoList({
