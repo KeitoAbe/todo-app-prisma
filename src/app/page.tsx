@@ -53,6 +53,18 @@ async function updateTodoDone(id: number, done: boolean) {
   }
 }
 
+async function updateTodoText(id: number, text: string) {
+  "use server";
+  try {
+    await prisma.todo.update({
+      where: { id: id },
+      data: { text: text },
+    });
+  } catch (error) {
+    throw new Error("Failed to update todo");
+  }
+}
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -61,6 +73,7 @@ export default function Home() {
         getTodoList={getTodoList}
         deleteTodo={deleteTodo}
         updateTodoDone={updateTodoDone}
+        updateTodoText={updateTodoText}
       />
     </div>
   );

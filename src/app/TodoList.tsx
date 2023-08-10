@@ -7,12 +7,14 @@ type Props = {
   getTodoList: () => Promise<{ id: number; text: string; done: boolean }[]>;
   deleteTodo: (id: number) => Promise<void>;
   updateTodoDone: (todoId: number, done: boolean) => Promise<void>;
+  updateTodoText: (todoId: number, text: string) => Promise<void>;
 };
 
 export default function TodoList({
   getTodoList,
   deleteTodo,
   updateTodoDone,
+  updateTodoText,
 }: Props) {
   const [todoList, setTodoList] = useState<
     { id: number; text: string; done: boolean }[]
@@ -56,6 +58,7 @@ export default function TodoList({
             todo={todo}
             handleClickForCheckbox={handleClickForCheckbox}
             handleClickForDeleteBtn={handleClickForDeleteBtn}
+            updateTodoText={updateTodoText}
           />
         ))}
       </ul>
