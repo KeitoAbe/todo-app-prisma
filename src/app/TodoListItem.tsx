@@ -2,7 +2,6 @@
 
 import styles from "./TodoListItem.module.css";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 
 type Props = {
@@ -31,7 +30,7 @@ export default function TodoList({
         />
         {todo.text}
       </div>
-      <div>
+      <div className={styles.btnContainer}>
         <Button variant="outlined" className={styles.editBtn}>
           編集
         </Button>
