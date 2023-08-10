@@ -48,8 +48,6 @@ async function updateTodoText(id: number, text: string) {
 }
 
 export default async function Home() {
-  const todoList = await getTodoList();
-
   return (
     <div className={styles.container}>
       <TodoForm registerTodo={registerTodo} />
