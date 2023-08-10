@@ -1,5 +1,6 @@
 "use client";
 
+import { FormControlLabel, FormGroup } from "@mui/material";
 import styles from "./TodoListItem.module.css";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -60,16 +61,24 @@ export default function TodoList({
   return (
     <li key={todo.id} className={styles.todoItem}>
       <div>
-        <Checkbox checked={todo.done} onClick={handleClickForCheckbox} />
-        {isedit ? (
-          <input
-            type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox checked={todo.done} onClick={handleClickForCheckbox} />
+            }
+            label={
+              isedit ? (
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                />
+              ) : (
+                todo.text
+              )
+            }
           />
-        ) : (
-          todo.text
-        )}
+        </FormGroup>
       </div>
       <div className={styles.btnContainer}>
         {isedit ? (
