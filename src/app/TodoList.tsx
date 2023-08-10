@@ -4,6 +4,7 @@ import styles from "./TodoList.module.css";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
+import TodoListItem from "./TodoListItem";
 
 type Props = {
   getTodoList: () => Promise<{ id: number; text: string; done: boolean }[]>;
@@ -53,25 +54,12 @@ export default function TodoList({
     <div>
       <ul className={styles.todoList}>
         {todoList.map((todo) => (
-          <li key={todo.id} className={styles.todoItem}>
-            <div>
-              <Checkbox
-                checked={todo.done}
-                onClick={() => {
-                  handleClickForCheckbox(todo.id, todo.done);
-                }}
-              />
-              {todo.text}
-            </div>
-            <Button
-              variant="outlined"
-              className={styles.deleteBtn}
-              color="error"
-              onClick={() => handleClickForDeleteBtn(todo.id)}
-            >
-              削除
-            </Button>
-          </li>
+          <TodoListItem
+            key={todo.id}
+            todo={todo}
+            handleClickForCheckbox={handleClickForCheckbox}
+            handleClickForDeleteBtn={handleClickForDeleteBtn}
+          />
         ))}
       </ul>
     </div>
