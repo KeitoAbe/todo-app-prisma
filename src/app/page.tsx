@@ -7,62 +7,42 @@ const prisma = new PrismaClient();
 
 async function getTodoList() {
   "use server";
-  try {
-    const todoList = await prisma.todo.findMany();
-    return todoList;
-  } catch (error) {
-    throw new Error("Failed to get todo list");
-  }
+  const todoList = await prisma.todo.findMany();
+  return todoList;
 }
 
 async function registrationTodo(text: string) {
   "use server";
-  try {
-    await prisma.todo.create({
-      data: {
-        text: text,
-      },
-    });
-  } catch (error) {
-    throw new Error("Failed to registration todo");
-  }
+  await prisma.todo.create({
+    data: {
+      text: text,
+    },
+  });
 }
 
 async function deleteTodo(id: number) {
   "use server";
-  try {
-    await prisma.todo.delete({
-      where: {
-        id: id,
-      },
-    });
-  } catch (error) {
-    throw new Error("Failed to delete todo");
-  }
+  await prisma.todo.delete({
+    where: {
+      id: id,
+    },
+  });
 }
 
 async function updateTodoDone(id: number, done: boolean) {
   "use server";
-  try {
-    await prisma.todo.update({
-      where: { id: id },
-      data: { done: done },
-    });
-  } catch (error) {
-    throw new Error("Failed to update todo");
-  }
+  await prisma.todo.update({
+    where: { id: id },
+    data: { done: done },
+  });
 }
 
 async function updateTodoText(id: number, text: string) {
   "use server";
-  try {
-    await prisma.todo.update({
-      where: { id: id },
-      data: { text: text },
-    });
-  } catch (error) {
-    throw new Error("Failed to update todo");
-  }
+  await prisma.todo.update({
+    where: { id: id },
+    data: { text: text },
+  });
 }
 
 export default function Home() {
