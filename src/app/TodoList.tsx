@@ -34,18 +34,16 @@ export default function TodoList({
   });
 
   return (
-    <div>
-      <ul>
-        {todoList.map((todo) => (
-          <TodoListItem
-            key={todo.id}
-            todo={todo}
-            updateTodoText={updateTodoText}
-            updateTodoDone={updateTodoDone}
-            deleteTodo={deleteTodo}
-          />
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {todoList.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          updateTodoText={updateTodoText}
+          updateTodoDone={updateTodoDone}
+          deleteTodo={deleteTodo}
+        />
+      ))}
+    </ul>
   );
 }
