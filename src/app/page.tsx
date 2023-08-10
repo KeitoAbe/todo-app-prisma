@@ -54,7 +54,7 @@ export default async function Home() {
     <div className={styles.container}>
       <TodoForm registerTodo={registerTodo} />
       <TodoList
-        todoList={todoList}
+        getTodoList={getTodoList}
         deleteTodo={deleteTodo}
         updateTodoDone={updateTodoDone}
         updateTodoText={updateTodoText}
