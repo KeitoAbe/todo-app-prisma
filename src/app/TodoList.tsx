@@ -1,9 +1,6 @@
 "use client";
 
-import styles from "./TodoList.module.css";
-import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
-import Checkbox from "@mui/material/Checkbox";
 import TodoListItem from "./TodoListItem";
 
 type Props = {
@@ -52,7 +49,7 @@ export default function TodoList({
 
   return (
     <div>
-      <ul className={styles.todoList}>
+      <ul>
         {todoList.map((todo) => (
           <TodoListItem
             key={todo.id}

@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./TodoList.module.css";
+import styles from "./TodoListItem.module.css";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
@@ -31,14 +31,19 @@ export default function TodoList({
         />
         {todo.text}
       </div>
-      <Button
-        variant="outlined"
-        className={styles.deleteBtn}
-        color="error"
-        onClick={() => handleClickForDeleteBtn(todo.id)}
-      >
-        削除
-      </Button>
+      <div>
+        <Button variant="outlined" className={styles.editBtn}>
+          編集
+        </Button>
+        <Button
+          variant="outlined"
+          className={styles.deleteBtn}
+          color="error"
+          onClick={() => handleClickForDeleteBtn(todo.id)}
+        >
+          削除
+        </Button>
+      </div>
     </li>
   );
 }
