@@ -53,7 +53,6 @@ export default function Home() {
       <TodoForm registerTodo={registerTodo} />
       <TodoList
         getTodoList={getTodoList}
-        registerTodo={registerTodo}
         deleteTodo={deleteTodo}
         updateTodoDone={updateTodoDone}
         updateTodoText={updateTodoText}
