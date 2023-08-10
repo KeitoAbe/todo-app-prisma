@@ -11,16 +11,16 @@ type Props = {
     text: string;
     done: boolean;
   };
-  handleClickForCheckbox: (id: number, done: boolean) => void;
-  handleClickForDeleteBtn: (id: number) => void;
   updateTodoText: (todoId: number, text: string) => Promise<void>;
+  updateTodoDone: (todoId: number, done: boolean) => Promise<void>;
+  deleteTodo: (todoId: number) => Promise<void>;
 };
 
 export default function TodoList({
   todo,
-  handleClickForCheckbox,
-  handleClickForDeleteBtn,
   updateTodoText,
+  updateTodoDone,
+  deleteTodo,
 }: Props) {
   const [isedit, setIsEdit] = useState(false);
   const [editText, setEditText] = useState("");
@@ -40,15 +40,26 @@ export default function TodoList({
     }
   };
 
+  const handleClickForDeleteBtn = async () => {
+    try {
+      await deleteTodo(todo.id);
+    } catch (error) {
+      alert("Todoの削除に失敗しました");
+    }
+  };
+
+  const handleClickForCheckbox = async () => {
+    try {
+      await updateTodoDone(todo.id, !todo.done);
+    } catch (error) {
+      alert("Todoの更新に失敗しました");
+    }
+  };
+
   return (
     <li key={todo.id} className={styles.todoItem}>
       <div>
-        <Checkbox
-          checked={todo.done}
-          onClick={() => {
-            handleClickForCheckbox(todo.id, todo.done);
-          }}
-        />
+        <Checkbox checked={todo.done} onClick={handleClickForCheckbox} />
         {isedit ? (
           <input
             type="text"
@@ -82,7 +93,7 @@ export default function TodoList({
           variant="outlined"
           className={styles.deleteBtn}
           color="error"
-          onClick={() => handleClickForDeleteBtn(todo.id)}
+          onClick={handleClickForDeleteBtn}
         >
           削除
         </Button>

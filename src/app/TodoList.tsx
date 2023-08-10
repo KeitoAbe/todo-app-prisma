@@ -29,22 +29,6 @@ export default function TodoList({
     }
   };
 
-  const handleClickForDeleteBtn = async (id: number) => {
-    try {
-      await deleteTodo(id);
-    } catch (error) {
-      alert("Todoの削除に失敗しました");
-    }
-  };
-
-  const handleClickForCheckbox = async (id: number, done: boolean) => {
-    try {
-      await updateTodoDone(id, !done);
-    } catch (error) {
-      alert("Todoの更新に失敗しました");
-    }
-  };
-
   useEffect(() => {
     updateTodoList();
   });
@@ -56,9 +40,9 @@ export default function TodoList({
           <TodoListItem
             key={todo.id}
             todo={todo}
-            handleClickForCheckbox={handleClickForCheckbox}
-            handleClickForDeleteBtn={handleClickForDeleteBtn}
             updateTodoText={updateTodoText}
+            updateTodoDone={updateTodoDone}
+            deleteTodo={deleteTodo}
           />
         ))}
       </ul>
