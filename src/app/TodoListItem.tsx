@@ -36,7 +36,7 @@ export default function TodoList({
     try {
       await updateTodoText(todo.id, editText);
     } catch (error) {
-      console.log(error);
+      alert("Todoの更新に失敗しました");
     }
   };
 
