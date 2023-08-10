@@ -3,7 +3,9 @@ import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient({
+  log: ["query"],
+});
 
 async function getTodoList() {
   "use server";
@@ -11,7 +13,7 @@ async function getTodoList() {
   return todoList;
 }
 
-async function registrationTodo(text: string) {
+async function registerTodo(text: string) {
   "use server";
   await prisma.todo.create({
     data: {
@@ -48,9 +50,10 @@ async function updateTodoText(id: number, text: string) {
 export default function Home() {
   return (
     <div className={styles.container}>
-      <TodoForm registrationTodo={registrationTodo} />
+      <TodoForm registerTodo={registerTodo} />
       <TodoList
         getTodoList={getTodoList}
+        registerTodo={registerTodo}
         deleteTodo={deleteTodo}
         updateTodoDone={updateTodoDone}
         updateTodoText={updateTodoText}

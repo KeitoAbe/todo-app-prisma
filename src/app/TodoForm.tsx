@@ -6,10 +6,10 @@ import { TextField } from "@mui/material";
 import { useState } from "react";
 
 type Props = {
-  registrationTodo: (text: string) => Promise<void>;
+  registerTodo: (text: string) => Promise<void>;
 };
 
-export default function TodoList({ registrationTodo }: Props) {
+export default function TodoList({ registerTodo }: Props) {
   const [text, setText] = useState("");
 
   const handleChange = (e: { target: { value: string } }) => {
@@ -20,7 +20,7 @@ export default function TodoList({ registrationTodo }: Props) {
     if (text === "") return;
 
     try {
-      await registrationTodo(text);
+      await registerTodo(text);
       setText("");
     } catch (error) {
       alert("Todoの登録に失敗しました");
