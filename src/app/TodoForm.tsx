@@ -1,26 +1,27 @@
 "use client";
 
-import styles from "./TodoForm.module.css";
-import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Button from "@mui/material/Button";
+import { TextField } from "@mui/material";
+import styles from "./TodoForm.module.css";
 
 type Props = {
   registerTodo: (text: string) => Promise<void>;
 };
 
-export default function TodoList({ registerTodo }: Props) {
+export default function TodoForm({ registerTodo }: Props) {
   const router = useRouter();
   const [text, setText] = useState("");
 
-  const handleChange = (e: { target: { value: string } }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if (text === "") return;
 
+    e.preventDefault();
     try {
       await registerTodo(text);
       setText("");
@@ -31,23 +32,25 @@ export default function TodoList({ registerTodo }: Props) {
   };
 
   return (
-    <div>
+    <>
       <h1 className={styles.heading}>Prismaを使ったTodoアプリ</h1>
-      <TextField
-        id="standard-basic"
-        label="Todoを入力"
-        variant="standard"
-        className={styles.textField}
-        value={text}
-        onChange={handleChange}
-      />
-      <Button
-        variant="contained"
-        className={styles.registrationBtn}
-        onClick={handleClick}
-      >
-        登録
-      </Button>
-    </div>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          id="standard-basic"
+          label="Todoを入力"
+          variant="standard"
+          className={styles.textField}
+          value={text}
+          onChange={handleChange}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          className={styles.registrationBtn}
+        >
+          登録
+        </Button>
+      </form>
+    </>
   );
 }
