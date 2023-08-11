@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { deleteTodo, updateTodoDone, updateTodoText } from "./actions";
 
 type Props = {
   todo: {
@@ -13,17 +14,9 @@ type Props = {
     text: string;
     done: boolean;
   };
-  updateTodoText: (id: number, text: string) => Promise<void>;
-  updateTodoDone: (id: number, done: boolean) => Promise<void>;
-  deleteTodo: (id: number) => Promise<void>;
 };
 
-export default function TodoList({
-  todo,
-  updateTodoText,
-  updateTodoDone,
-  deleteTodo,
-}: Props) {
+export default function TodoList({ todo }: Props) {
   const router = useRouter();
   const [isedit, setIsEdit] = useState(false);
   const [editText, setEditText] = useState("");

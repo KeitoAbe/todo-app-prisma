@@ -5,12 +5,9 @@ import { useRouter } from "next/navigation";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import styles from "./TodoForm.module.css";
+import { registerTodo } from "@/app/actions";
 
-type Props = {
-  registerTodo: (text: string) => Promise<void>;
-};
-
-export default function TodoForm({ registerTodo }: Props) {
+export default function TodoForm() {
   const router = useRouter();
   const [text, setText] = useState("");
 
