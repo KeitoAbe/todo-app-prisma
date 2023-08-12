@@ -1,6 +1,6 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Todo } from "@prisma/client";
 
 const prisma = new PrismaClient({
   log: ["query"],
@@ -15,7 +15,10 @@ export async function registerTodo(text: string) {
 }
 
 export async function getTodoList() {
-  const todoList = await prisma.todo.findMany();
+  //Todoテーブルからすべてのレコードを取得し、sort_orderフィールドを昇順に並べ、sort_orderフィールドがnullの場合はidフィールドを昇順に並べる
+  const todoList = await prisma.$queryRaw<Todo[]>`
+    SELECT * FROM Todo ORDER BY sort_order IS NULL, sort_order ASC, id ASC;
+  `;
   return todoList;
 }
 

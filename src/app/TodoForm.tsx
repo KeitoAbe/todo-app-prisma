@@ -16,9 +16,9 @@ export default function TodoForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (text === "") return;
 
-    e.preventDefault();
     try {
       await registerTodo(text);
       setText("");

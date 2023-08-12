@@ -14,4 +14,4 @@ model Todo {
   id   Int     @id @default(autoincrement())
   text String  @db.VarChar(255)
   done Boolean @default(false)
-}
+  sort_order Int?
