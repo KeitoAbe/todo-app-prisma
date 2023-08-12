@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Ace SQL dump
-# バージョン 20048
+# バージョン 20046
 #
 # https://sequel-ace.com/
 # https://github.com/Sequel-Ace/Sequel-Ace
 #
 # ホスト: localhost (MySQL 8.0.34)
 # データベース: prisma_db
-# 生成時間: 2023-08-09 07:45:50 +0000
+# 生成時間: 2023-08-12 14:50:23 +0000
 # ************************************************************
 
 
@@ -26,23 +26,13 @@ SET NAMES utf8mb4;
 DROP TABLE IF EXISTS `Todo`;
 
 CREATE TABLE `Todo` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `done` bit(1) NOT NULL DEFAULT b'0',
+  `sort_order` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-LOCK TABLES `Todo` WRITE;
-/*!40000 ALTER TABLE `Todo` DISABLE KEYS */;
-
-INSERT INTO `Todo` (`id`, `text`, `done`)
-VALUES
-	(5,'仕事する',b'1'),
-	(7,'食事する',b'0'),
-	(8,'買い物する',b'0');
-
-/*!40000 ALTER TABLE `Todo` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 
