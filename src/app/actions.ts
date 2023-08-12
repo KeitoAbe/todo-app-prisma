@@ -43,3 +43,10 @@ export async function updateTodoText(id: number, text: string) {
     data: { text: text },
   });
 }
+
+export async function updateTodoSortOrder(id: number, sortOrder: number) {
+  await prisma.todo.update({
+    where: { id: id },
+    data: { sort_order: sortOrder },
+  });
+}

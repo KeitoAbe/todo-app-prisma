@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import TodoListItem from "./TodoListItem";
+import { updateTodoSortOrder } from "./actions";
 
 type Props = {
   todoList: {
@@ -24,6 +25,9 @@ export default function TodoList({ todoList }: Props) {
     newArray[index] = newArray[index + direction];
     newArray[index + direction] = temp;
     setTodos(newArray);
+    newArray.map((todo, index) => {
+      updateTodoSortOrder(todo.id, index);
+    });
   };
 
   return (
