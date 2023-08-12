@@ -14,9 +14,17 @@ type Props = {
     text: string;
     done: boolean;
   };
+  index: number;
+  move: (index: number, direction: number) => void;
+  todoListLastIndex: number;
 };
 
-export default function TodoList({ todo }: Props) {
+export default function TodoList({
+  todo,
+  index,
+  move,
+  todoListLastIndex,
+}: Props) {
   const router = useRouter();
   const [isedit, setIsEdit] = useState(false);
   const [editText, setEditText] = useState("");
@@ -80,6 +88,15 @@ export default function TodoList({ todo }: Props) {
         </FormGroup>
       </div>
       <div className={styles.btnContainer}>
+        <button disabled={index === 0} onClick={() => move(index, -1)}>
+          ↑
+        </button>
+        <button
+          disabled={index === todoListLastIndex}
+          onClick={() => move(index, 1)}
+        >
+          ↓
+        </button>
         {isedit ? (
           <Button
             variant="contained"
