@@ -13,7 +13,7 @@ type Props = {
   index: number;
   move: (index: number, direction: number) => void;
   todoListLastIndex: number;
-  updateTodoList: () => void;
+  updateTodoList: () => Promise<void>;
 };
 
 export default function TodoList({
