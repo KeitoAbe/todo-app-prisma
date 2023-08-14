@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import TodoListItem from "./TodoListItem";
 import { getTodoList, updateTodoSortOrder } from "./actions";
 import { Todo } from "@prisma/client";
