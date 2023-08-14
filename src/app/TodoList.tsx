@@ -2,15 +2,11 @@
 
 import { use, useEffect, useState } from "react";
 import TodoListItem from "./TodoListItem";
-import { updateTodoSortOrder } from "./actions";
+import { getTodoList, updateTodoSortOrder } from "./actions";
+import { Todo } from "@prisma/client";
 
 type Props = {
-  todoList: {
-    id: number;
-    text: string;
-    done: boolean;
-    sort_order: number | null;
-  }[];
+  todoList: Todo[];
 };
 
 export default function TodoList({ todoList }: Props) {
@@ -18,6 +14,15 @@ export default function TodoList({ todoList }: Props) {
   useEffect(() => {
     setTodos(todoList);
   }, [todoList]);
+
+  const updateTodoList = async () => {
+    try {
+      const todoList = await getTodoList();
+      setTodos(todoList);
+    } catch (error) {
+      alert("Todoリストの取得に失敗しました");
+    }
+  };
 
   const move = (index: number, direction: number) => {
     const newArray = [...todos];
@@ -39,6 +44,7 @@ export default function TodoList({ todoList }: Props) {
           index={index}
           move={move}
           todoListLastIndex={todos.length - 1}
+          updateTodoList={updateTodoList}
         />
       ))}
     </ul>
