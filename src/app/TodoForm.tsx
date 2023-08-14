@@ -8,7 +8,7 @@ import styles from "./TodoForm.module.css";
 import { registerTodo } from "@/app/actions";
 
 type Props = {
-  updateTodoList: () => void;
+  updateTodoList: () => Promise<void>;
 };
 
 export default function TodoForm({ updateTodoList }: Props) {
