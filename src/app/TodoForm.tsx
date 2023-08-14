@@ -7,7 +7,11 @@ import { TextField } from "@mui/material";
 import styles from "./TodoForm.module.css";
 import { registerTodo } from "@/app/actions";
 
-export default function TodoForm() {
+type Props = {
+  updateTodoList: () => void;
+};
+
+export default function TodoForm({ updateTodoList }: Props) {
   const router = useRouter();
   const [text, setText] = useState("");
 
@@ -22,7 +26,7 @@ export default function TodoForm() {
     try {
       await registerTodo(text);
       setText("");
-      router.refresh();
+      updateTodoList();
     } catch (error) {
       alert("Todoの登録に失敗しました");
     }

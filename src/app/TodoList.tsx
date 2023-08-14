@@ -6,24 +6,12 @@ import { getTodoList, updateTodoSortOrder } from "./actions";
 import { Todo } from "@prisma/client";
 
 type Props = {
-  todoList: Todo[];
+  todos: Todo[];
+  setTodos: (todos: Todo[]) => void;
+  updateTodoList: () => Promise<void>;
 };
 
-export default function TodoList({ todoList }: Props) {
-  const [todos, setTodos] = useState(todoList);
-  useEffect(() => {
-    setTodos(todoList);
-  }, [todoList]);
-
-  const updateTodoList = async () => {
-    try {
-      const todoList = await getTodoList();
-      setTodos(todoList);
-    } catch (error) {
-      alert("Todoリストの取得に失敗しました");
-    }
-  };
-
+export default function TodoList({ todos, setTodos, updateTodoList }: Props) {
   const move = (index: number, direction: number) => {
     const newArray = [...todos];
     const temp = newArray[index];
