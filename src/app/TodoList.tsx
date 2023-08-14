@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import TodoListItem from "./TodoListItem";
-import { getTodoList, updateTodoSortOrder } from "./actions";
+import { updateTodoSortOrder } from "./actions";
 import { Todo } from "@prisma/client";
 
 type Props = {
