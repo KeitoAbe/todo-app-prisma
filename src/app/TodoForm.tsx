@@ -12,7 +12,6 @@ type Props = {
 };
 
 export default function TodoForm({ updateTodoList }: Props) {
-  const router = useRouter();
   const [text, setText] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
