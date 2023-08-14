@@ -15,3 +15,4 @@ model Todo {
   text String  @db.VarChar(255)
   done Boolean @default(false)
   sort_order Int?
+}
