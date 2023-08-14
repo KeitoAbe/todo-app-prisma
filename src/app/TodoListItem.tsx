@@ -6,13 +6,10 @@ import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { deleteTodo, updateTodoDone, updateTodoText } from "./actions";
+import { Todo } from "@prisma/client";
 
 type Props = {
-  todo: {
-    id: number;
-    text: string;
-    done: boolean;
-  };
+  todo: Todo;
   index: number;
   move: (index: number, direction: number) => void;
   todoListLastIndex: number;
