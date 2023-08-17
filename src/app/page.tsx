@@ -4,11 +4,13 @@ import styles from "./page.module.css";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { getTodoList } from "./actions";
-import { useEffect, useState } from "react";
-import { Todo } from "@prisma/client";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { todosState } from "./utils/atom";
 
 export default function Home() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const setTodos = useSetRecoilState(todosState);
+
   useEffect(() => {
     updateTodoList();
   }, []);
@@ -25,11 +27,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <TodoForm updateTodoList={updateTodoList} />
-      <TodoList
-        todos={todos}
-        setTodos={setTodos}
-        updateTodoList={updateTodoList}
-      />
+      <TodoList updateTodoList={updateTodoList} />
     </div>
   );
 }

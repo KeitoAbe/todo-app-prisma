@@ -1,16 +1,16 @@
 "use client";
 
+import { useRecoilState } from "recoil";
 import TodoListItem from "./TodoListItem";
 import { updateTodoSortOrder } from "./actions";
-import { Todo } from "@prisma/client";
+import { todosState } from "./utils/atom";
 
 type Props = {
-  todos: Todo[];
-  setTodos: (todos: Todo[]) => void;
   updateTodoList: () => Promise<void>;
 };
 
-export default function TodoList({ todos, setTodos, updateTodoList }: Props) {
+export default function TodoList({ updateTodoList }: Props) {
+  const [todos, setTodos] = useRecoilState(todosState);
   const move = (index: number, direction: number) => {
     const newArray = [...todos];
     const temp = newArray[index];
@@ -30,7 +30,6 @@ export default function TodoList({ todos, setTodos, updateTodoList }: Props) {
           todo={todo}
           index={index}
           move={move}
-          todoListLastIndex={todos.length - 1}
           updateTodoList={updateTodoList}
         />
       ))}

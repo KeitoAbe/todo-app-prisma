@@ -7,24 +7,20 @@ import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { deleteTodo, updateTodoDone, updateTodoText } from "./actions";
 import { Todo } from "@prisma/client";
+import { useRecoilValue } from "recoil";
+import { todosState } from "./utils/atom";
 
 type Props = {
   todo: Todo;
   index: number;
   move: (index: number, direction: number) => void;
-  todoListLastIndex: number;
   updateTodoList: () => Promise<void>;
 };
 
-export default function TodoList({
-  todo,
-  index,
-  move,
-  todoListLastIndex,
-  updateTodoList,
-}: Props) {
+export default function TodoList({ todo, index, move, updateTodoList }: Props) {
   const [isedit, setIsEdit] = useState(false);
   const [editText, setEditText] = useState("");
+  const todoListLastIndex = useRecoilValue(todosState).length - 1;
 
   const handleClickForEditBtn = () => {
     setIsEdit(true);
